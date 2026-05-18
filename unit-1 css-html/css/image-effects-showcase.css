@@ -1,0 +1,264 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-top: #071524;
+  --bg-bottom: #0f2945;
+  --panel: #0b1d30;
+  --text: #eef5ff;
+  --accent: #ffd166;
+  --muted: #a8c2dd;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255, 209, 102, 0.2), transparent 35%),
+    radial-gradient(circle at 90% 85%, rgba(86, 204, 242, 0.18), transparent 40%),
+    linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+  min-height: 100vh;
+}
+
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.4rem 1.2rem 1rem;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.hero p {
+  margin: 0.7rem auto 0;
+  max-width: 700px;
+  color: var(--muted);
+}
+
+.gallery {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  isolation: isolate;
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.card h2 {
+  margin: 0;
+  padding: 0.85rem 0.95rem;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.45);
+}
+
+.zoom-in:hover img {
+  transform: scale(1.15);
+}
+
+.zoom-out img {
+  transform: scale(1.2);
+}
+
+.zoom-out:hover img {
+  transform: scale(1);
+}
+
+.rotate-lift:hover img {
+  transform: scale(1.08) rotate(4deg) translateY(-2px);
+}
+
+.skew-slide:hover img {
+  transform: scale(1.06) translateX(8px) skewX(-4deg);
+}
+
+.grayscale-color img {
+  filter: grayscale(100%);
+}
+
+.grayscale-color:hover img {
+  filter: grayscale(0%);
+}
+
+.blur-sharp img {
+  filter: blur(2.8px) brightness(0.84);
+}
+
+.blur-sharp:hover img {
+  filter: blur(0) brightness(1);
+}
+
+.sepia-glow img {
+  filter: sepia(85%);
+}
+
+.sepia-glow:hover img {
+  filter: sepia(15%) saturate(1.25);
+}
+
+.sepia-glow:hover {
+  box-shadow: 0 0 0 2px rgba(255, 209, 102, 0.5), 0 20px 35px rgba(255, 209, 102, 0.25);
+}
+
+.shadow-pop:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 28px 40px rgba(0, 0, 0, 0.5);
+}
+
+.shadow-pop:hover img {
+  transform: scale(1.08);
+}
+
+.shine-sweep::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.16) 40%,
+    rgba(255, 255, 255, 0.56) 50%,
+    rgba(255, 255, 255, 0.16) 60%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+}
+
+.shine-sweep:hover::before {
+  left: 130%;
+  transition: left 0.7s ease;
+}
+
+.overlay-reveal .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6, 15, 24, 0.9), rgba(7, 20, 36, 0.25));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: 1rem;
+  transform: translateY(35%);
+  opacity: 0;
+  transition: transform 0.45s ease, opacity 0.45s ease;
+}
+
+.overlay-reveal .overlay h2,
+.overlay-reveal .overlay p {
+  margin: 0;
+}
+
+.overlay-reveal .overlay p {
+  color: #d7e7f8;
+  font-size: 0.9rem;
+}
+
+.overlay-reveal:hover .overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.tilt-3d {
+  perspective: 900px;
+}
+
+.tilt-3d img {
+  transform-origin: center;
+}
+
+.tilt-3d:hover img {
+  transform: rotateX(8deg) rotateY(-10deg) scale(1.08);
+}
+
+.flip-card {
+  perspective: 1000px;
+  min-height: 272px;
+}
+
+.flip-card .flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 272px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front,
+.flip-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.flip-front h2 {
+  background: rgba(6, 14, 24, 0.7);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  gap: 0.55rem;
+  padding: 1rem;
+  background: linear-gradient(140deg, #0a2238, #163e5f);
+}
+
+.flip-back h2,
+.flip-back p {
+  margin: 0;
+}
+
+.flip-back p {
+  color: #d6e8fb;
+}
+
+@media (max-width: 680px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .card img {
+    height: 210px;
+  }
+}
